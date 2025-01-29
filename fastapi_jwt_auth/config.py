@@ -9,7 +9,7 @@ from pydantic import (
 )
 
 class LoadConfig(BaseModel):
-    authjwt_token_location: Optional[Sequence[StrictStr]] = {'headers'}
+    authjwt_token_location: Optional[List[StrictStr]] = {'headers'}
     authjwt_secret_key: Optional[StrictStr] = None
     authjwt_public_key: Optional[StrictStr] = None
     authjwt_private_key: Optional[StrictStr] = None
@@ -18,9 +18,9 @@ class LoadConfig(BaseModel):
     authjwt_decode_leeway: Optional[Union[StrictInt,timedelta]] = 0
     authjwt_encode_issuer: Optional[StrictStr] = None
     authjwt_decode_issuer: Optional[StrictStr] = None
-    authjwt_decode_audience: Optional[Union[StrictStr,Sequence[StrictStr]]] = None
+    authjwt_decode_audience: Optional[Union[StrictStr,List[StrictStr]]] = None
     authjwt_denylist_enabled: Optional[StrictBool] = False
-    authjwt_denylist_token_checks: Optional[Sequence[StrictStr]] = {'access','refresh'}
+    authjwt_denylist_token_checks: Optional[List[StrictStr]] = {'access','refresh'}
     authjwt_header_name: Optional[StrictStr] = "Authorization"
     authjwt_header_type: Optional[StrictStr] = "Bearer"
     authjwt_access_token_expires: Optional[Union[StrictBool,StrictInt,timedelta]] = timedelta(minutes=15)
@@ -42,7 +42,7 @@ class LoadConfig(BaseModel):
     authjwt_refresh_csrf_cookie_path: Optional[StrictStr] = "/"
     authjwt_access_csrf_header_name: Optional[StrictStr] = "X-CSRF-Token"
     authjwt_refresh_csrf_header_name: Optional[StrictStr] = "X-CSRF-Token"
-    authjwt_csrf_methods: Optional[Sequence[StrictStr]] = {'POST','PUT','PATCH','DELETE'}
+    authjwt_csrf_methods: Optional[List[StrictStr]] = {'POST','PUT','PATCH','DELETE'}
 
     @validator('authjwt_access_token_expires')
     def validate_access_token_expires(cls, v):
